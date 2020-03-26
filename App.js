@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import Home from './src/screens/home';
 import Login from './src/screens/login';
+import Home from './src/screens/home';
+import HallDeail from './src/screens/hallDetail';
 import {
   View,
   Text,

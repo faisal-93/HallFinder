@@ -139,7 +139,8 @@ const style = StyleSheet.create({
         fontFamily: 'Poppins-Light',
         textAlign: "center",
         color: 'white',
-        fontSize: 20
+        fontSize: 20,
+        textAlignVertical: 'center'
     },
 
     filterContainer: {
@@ -236,7 +237,27 @@ const style = StyleSheet.create({
         height: StyleSheet.hairlineWidth,
         marginTop: 20,
         backgroundColor: '#D9D9D9'
-    }
+    },
+
+    buttonSM: {
+        width: '100%',
+        height: 50,
+        marginTop: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        borderColor: 'transparent',
+        borderRadius: 10,
+        backgroundColor: '#1C6884',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 1,
+        textAlign: "center"
+    },
 });
 
 export default style;
