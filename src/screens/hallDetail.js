@@ -64,6 +64,7 @@ export default class HallDetail extends Component {
 
     renderScrollViewContent() {
         return (
+            // todo: try changing style here......
             <ScrollView style={styles.container}>
                 <StatusBar backgroundColor="#cccccc" barStyle="dark-content"/>
                 {/* <Image 
@@ -226,6 +227,7 @@ export default class HallDetail extends Component {
                     backgroundColor='#2a7102'
                     />
                 <Animated.ScrollView
+                    // todo: or try changing style here......
                     style={{flex: 1, backgroundColor: 'grey'}}
                     scrollEventThrottle={1}
                     onScroll={Animated.event(
