@@ -3,7 +3,8 @@ import { StyleSheet, Dimensions } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        paddingTop: 300,
     },
 
     imageContainer: {
@@ -13,8 +14,8 @@ const styles = StyleSheet.create({
     },
 
     detailContainer: {
-        flex: .5,
-        marginTop: -30,
+        flex: 1,
+        //marginTop: -30,
         marginBottom: 20,
         paddingHorizontal: 20,
         flexDirection: "column",

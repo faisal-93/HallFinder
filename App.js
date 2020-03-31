@@ -12,7 +12,7 @@ import {
 const App: () => React$Node = () => {
   return (
     <>
-    <Login />
+    <HallDeail />
     </>
   );
 };

@@ -12,8 +12,14 @@ import {
     FlatList,
     ScrollView,
     YellowBox,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform,
+    Animated
 } from 'react-native';
+
+const HEADER_MAX_HEIGHT = 300;
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 55;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 export default class HallDetail extends Component {
     constructor(props) {
@@ -21,6 +27,13 @@ export default class HallDetail extends Component {
         YellowBox.ignoreWarnings([
             'VirtualizedLists should never be nested', // TODO: Remove when fixed
         ]);
+
+        this.state = {
+            scrollY: new Animated.Value(
+                // iOS has negative initial scroll value because content inset...
+                Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
+              ),
+        }
     }    
 
     renderGallery(item) {
@@ -49,15 +62,15 @@ export default class HallDetail extends Component {
         );
     }
 
-    render() {
+    renderScrollViewContent() {
         return (
             <ScrollView style={styles.container}>
                 <StatusBar backgroundColor="#cccccc" barStyle="dark-content"/>
-                <Image 
+                {/* <Image 
                     source={require('../assets/images/hall2.jpg')}
                     resizeMode="cover"
                     style={styles.imageContainer}
-                />
+                /> */}
                 <View style={styles.detailContainer}>
                     <View style={styles.headerSection}>
                         <View style={styles.addressContainer}>
@@ -164,6 +177,78 @@ export default class HallDetail extends Component {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+        )
+    }
+
+    render() {
+        const scrollY = Animated.add(
+            this.state.scrollY,
+            Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
+          );
+          const headerTranslate = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, -HEADER_SCROLL_DISTANCE],
+            extrapolate: 'clamp',
+          });
+      
+          const imageOpacity = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+            outputRange: [1, 1, 0],
+            extrapolate: 'clamp',
+          });
+          const titleOpacity = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, 1, 1],
+            extrapolate: 'clamp',
+          });
+          const imageTranslate = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, 100],
+            extrapolate: 'clamp',
+          });
+      
+          const titleScale = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [0.8, 1],
+            extrapolate: 'clamp',
+          });
+          const titleTranslate = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, 0, -8],
+            extrapolate: 'clamp',
+          });
+
+        return (
+            <View style={{flex: 1}}>
+                <StatusBar
+                    translucent={false}
+                    barStyle="light-content"
+                    backgroundColor='#2a7102'
+                    />
+                <Animated.ScrollView
+                    style={{flex: 1, backgroundColor: 'grey'}}
+                    scrollEventThrottle={1}
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+                        { useNativeDriver: true },
+                    )}
+                    // iOS offset for RefreshControl
+                    contentInset={{ top: HEADER_MAX_HEIGHT }}
+                    contentOffset={{ y: -HEADER_MAX_HEIGHT }} >
+                    {this.renderScrollViewContent()}
+                </Animated.ScrollView>
+
+                <Animated.View
+                    pointerEvents="none"
+                    style={{borderBottomWidth: 1, borderColor: '#DCDCDC', position: 'absolute', top: 0, left: 0, right: 0, 
+                    justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', overflow: 'hidden', 
+                    height: HEADER_MAX_HEIGHT, transform: [{ translateY: headerTranslate }], zIndex: 1}} >
+                        <Animated.Image
+                            style={{alignSelf: 'center', width: '100%', height: HEADER_MAX_HEIGHT, resizeMode: 'cover', opacity: imageOpacity, transform: [{ translateY: imageTranslate }] }}
+                            source={require('../assets/images/hall1.jpg')}
+                        />
+                </Animated.View>
+            </View>
         )
     }
 }
