@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import Login from './src/screens/login';
-import Home from './src/screens/home';
-import HallDeail from './src/screens/hallDetail';
+import Login from './src/components/login';
+import Home from './src/components/home';
+import HallDeail from './src/components/hallDetail';
+import SignUp from './src/components/signup'
 import {
   View,
   Text,
@@ -12,7 +13,7 @@ import {
 const App: () => React$Node = () => {
   return (
     <>
-    <HallDeail />
+    <Login />
     </>
   );
 };
