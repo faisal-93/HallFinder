@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     detailContainer: {
         flex: 1,
         //marginTop: -30,
-        marginBottom: 20,
+        marginBottom: 10,
         paddingHorizontal: 20,
         flexDirection: "column",
         borderTopLeftRadius: 15,

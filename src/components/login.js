@@ -9,12 +9,20 @@ import {
 } from 'react-native';
 
 export default class Login extends Component {
-  render() {    
+  constructor(props) {
+    super(props);
+  }
+
+  render() { 
+    const {navigation} = this.props;
+
     return (
-      <ImageBackground source={require('../assets/images/background.jpg')} 
-                       resizeMode="cover" 
-                       style={styles.backgroundImage}
-                       blurRadius={5} >
+      <ImageBackground 
+          source={require('../assets/images/background.jpg')}
+          resizeMode="cover" 
+          style={styles.backgroundImage}
+          blurRadius={5} 
+        >
         <View style={styles.container}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Banquet</Text>
@@ -30,7 +38,10 @@ export default class Login extends Component {
               />
             </View>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => navigation.navigate('SignUp')}
+              >
               <Text style={styles.text}>SIGN IN</Text>
             </TouchableOpacity>
           </View>

@@ -15,16 +15,21 @@ import {
 
 export default class Home extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     renderItem(item) {
+        const {navigation} = this.props;
         return (
           <TouchableOpacity 
                 style={styles.listItemContainer}
-                onPress={() => {console.log('hello')}}  >
+                onPress={() => navigation.navigate('Hall Detail')}  >
             <ImageBackground 
-                source={item.img}
-                resizeMode='cover'
-                style={styles.listItemImage}
-                imageStyle={{borderRadius: 10}} >
+                    source={item.img}
+                    resizeMode='cover'
+                    style={styles.listItemImage}
+                    imageStyle={{borderRadius: 10}} >
                 <Icon 
                     name='heart-o'
                     type='font-awesome'
@@ -78,9 +83,7 @@ export default class Home extends Component {
         };
 
         return (
-            <View style={styles.container}>
-                <StatusBar backgroundColor="#cccccc" barStyle="dark-content"/>
-                
+            <View style={styles.container}>                
                 <View style={styles.searchBar}>
                     <Icon
                         name='search'

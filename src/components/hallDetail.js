@@ -9,6 +9,7 @@ import {
     StatusBar,
     Image,
     Dimensions,
+    StyleSheet,
     FlatList,
     ScrollView,
     YellowBox,
@@ -20,6 +21,7 @@ import {
 const HEADER_MAX_HEIGHT = 300;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 55;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
 export default class HallDetail extends Component {
     constructor(props) {
@@ -182,6 +184,7 @@ export default class HallDetail extends Component {
     }
 
     render() {
+        const {navigation} = this.props;
         const scrollY = Animated.add(
             this.state.scrollY,
             Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
@@ -228,7 +231,7 @@ export default class HallDetail extends Component {
                     />
                 <Animated.ScrollView
                     // todo: or try changing style here......
-                    style={{flex: 1, backgroundColor: 'grey'}}
+                    style={{flex: 1}}
                     scrollEventThrottle={1}
                     onScroll={Animated.event(
                         [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
@@ -242,14 +245,23 @@ export default class HallDetail extends Component {
 
                 <Animated.View
                     pointerEvents="none"
-                    style={{borderBottomWidth: 1, borderColor: '#DCDCDC', position: 'absolute', top: 0, left: 0, right: 0, 
-                    justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', overflow: 'hidden', 
+                    style={{position: 'absolute', top: 0, left: 0, right: 0, 
+                    justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', overflow: 'hidden', 
                     height: HEADER_MAX_HEIGHT, transform: [{ translateY: headerTranslate }], zIndex: 1}} >
                         <Animated.Image
                             style={{alignSelf: 'center', width: '100%', height: HEADER_MAX_HEIGHT, resizeMode: 'cover', opacity: imageOpacity, transform: [{ translateY: imageTranslate }] }}
                             source={require('../assets/images/hall1.jpg')}
                         />
                 </Animated.View>
+
+                <AnimatedTouchable
+                        style={{opacity: titleOpacity, backgroundColor: 'white', alignSelf: 'center', width: 52, height: 52, 
+                                alignItems: 'center', justifyContent: 'center', borderRadius: 26, position: 'absolute', top: 30, left: 20, 
+                                borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(0,0,0,0.2)', elevation: 5, 
+                                transform: [{scale: titleScale},{translateY: titleTranslate}]}}
+                        onPress={() => navigation.goBack()} >
+                    <Icon name='arrow-back' color='black' style={{alignSelf: "center"}} />
+                </AnimatedTouchable>
             </View>
         )
     }

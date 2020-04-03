@@ -9,7 +9,12 @@ import {
 } from 'react-native'
 
 export default class SignUp extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+        const {navigation} = this.props;
         return (
             <View style={styles.container}>
                 <ImageBackground 
@@ -52,7 +57,10 @@ export default class SignUp extends Component {
                                 placeholderTextColor='#C1C1C1'
                             />
                         </View>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity 
+                            style={styles.button}
+                            onPress={() => navigation.navigate('Home')}
+                        >
                             <Text style={styles.buttonText}>SAVE</Text>
                         </TouchableOpacity>
                     </View>

@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingTop: 25,
         paddingLeft: 15,
-        paddingRight: 15
+        paddingRight: 15,
+        marginBottom: -20
     },
 
     searchBar: {
