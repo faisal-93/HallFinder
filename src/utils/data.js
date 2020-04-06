@@ -1,7 +1,7 @@
 const data = [
     {
       id: '1',
-      name: 'Factory Event Hall',
+      name: 'Alan Event Hall',
       address: 'House#2, Road#12, Dhanmondi 2, Dhaka',
       category: 'Party Centre',
       rating: '4.5',
@@ -10,7 +10,7 @@ const data = [
     },
     {
       id: '2',
-      name: 'Factory Event Hall',
+      name: 'Billy Event Hall',
       address: 'House#2, Road#12, Dhanmondi 2, Dhaka',
       category: 'Party Centre',
       rating: '4.5',
@@ -19,7 +19,7 @@ const data = [
     },
     {
       id: '3',
-      name: 'Factory Event Hall',
+      name: 'Sam Event Hall',
       address: 'House#2, Road#12, Dhanmondi 2, Dhaka',
       category: 'Party Centre',
       rating: '4.5',
@@ -28,7 +28,7 @@ const data = [
     },
     {
       id: '4',
-      name: 'Factory Event Hall',
+      name: 'Sonia Event Hall',
       address: 'House#2, Road#12, Dhanmondi 2, Dhaka',
       category: 'Party Centre',
       rating: '4.5',
@@ -37,7 +37,7 @@ const data = [
     },
     {
       id: '5',
-      name: 'Factory Event Hall',
+      name: 'Andrew Event Hall',
       address: 'House#2, Road#12, Dhanmondi 2, Dhaka',
       category: 'Party Centre',
       rating: '4.5',
@@ -46,7 +46,7 @@ const data = [
     },
     {
       id: '6',
-      name: 'Factory Event Hall',
+      name: 'Joseph Event Hall',
       address: 'House#2, Road#12, Dhanmondi 2, Dhaka',
       category: 'Party Centre',
       rating: '4.5',

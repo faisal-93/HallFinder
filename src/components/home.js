@@ -17,6 +17,26 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            searchText: "",
+            data: data,
+            filteredData: []
+        };
+    }
+
+    searchByName = (searchText) => {
+        this.setState({searchText: searchText});
+
+        const filteredData = this.state.data.filter(item => {      
+            const itemData = `${item.name.toUpperCase()}`;
+            
+             const searchData = searchText.toUpperCase();
+              
+             return itemData.indexOf(searchData) > -1;    
+          });
+          
+        this.setState({ filteredData: filteredData });
     }
 
     renderItem(item) {
@@ -96,11 +116,13 @@ export default class Home extends Component {
                         style={styles.searchInputText}
                         placeholder='Search'
                         placeholderTextColor='#C1C1C1'
+                        onChangeText={this.searchByName}
+                        value={this.state.searchText}
                     />
                 </View>                
 
                 <FlatList 
-                    data={data}
+                    data={this.state.filteredData && this.state.filteredData.length > 0 ? this.state.filteredData : this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
                     keyExtractor={item => item.id}
                     ListHeaderComponent={getHeader}
